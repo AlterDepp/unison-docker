@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  unison:
+    hostname: ${HOSTNAME}
+    build:
+      context: ./archlinux
+      args:
+        - USER=${USER}
+        - GROUP=${GROUP}
+        - PASSWD=${PASSWD}
+        - USER_UID=${USER_UID}
+        - USER_GID=${USER_GID}
+        - USERS_GID=${USERS_GID}
+        - SUDO_GID=${SUDO_GID}
+    volumes:
+      - ./archlinux/entrypoint.sh:/bin/entrypoint.sh
+      - ${BASEDIR_HOST}:${BASEDIR_DOCKER}
+      - ./home/.ssh:/home/${USER}/.ssh
+      - ./home/.unison:/home/${USER}/.unison
+    ports:
+      - "${SSH_PORT}:22"
+    restart: unless-stopped
