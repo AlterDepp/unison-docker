@@ -1,4 +1,4 @@
-FROM archlinux:base-20210516.0.23009
+FROM archlinux:base
 MAINTAINER stefan
 
 ARG USER
